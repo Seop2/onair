@@ -2,6 +2,8 @@
  * Supabase Edge Function: chzzk-search
  *
  * 치지직 채널 검색 + 라이브 여부 조회
+ * 주의: 치지직 공식 Open API에는 채널 키워드 검색 엔드포인트가 없어
+ *       비공식 API를 사용합니다. 서비스 중단 가능성이 있습니다.
  *
  * 배포: supabase functions deploy chzzk-search --no-verify-jwt
  */
@@ -19,8 +21,7 @@ type ChzzkChannel = {
 };
 
 const BASE_HEADERS = {
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+  "User-Agent": "OnAir-Community/1.0",
   "Accept": "application/json",
 };
 

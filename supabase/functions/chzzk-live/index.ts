@@ -1,67 +1,95 @@
-// Follow this setup guide to integrate the Deno language server with your editor:
-// https://deno.land/manual/getting_started/setup_your_environment
-// This enables autocomplete, go to definition, etc.
-
-// Setup type definitions for built-in Supabase Runtime APIs
+/**
+ * Supabase Edge Function: chzzk-live
+ *
+ * 개별 채널의 라이브 상태를 조회합니다.
+ * 공식 Open API를 우선 사용하며, 공식 API에서 조회되지 않을 경우
+ * 비공식 API를 폴백으로 사용합니다.
+ *
+ * 배포: supabase functions deploy chzzk-live --no-verify-jwt
+ */
 import { corsHeaders } from "../cors.ts";
 
+// deno-lint-ignore no-explicit-any
+type AnyRecord = Record<string, any>;
+
+async function fetchLiveViaOpenApi(
+  channelId: string,
+  clientId: string,
+  clientSecret: string,
+): Promise<AnyRecord | null> {
+  // 공식 API의 라이브 목록(최대 20개)에서 해당 채널 존재 여부 확인
+  const livesRes = await fetch(`https://openapi.chzzk.naver.com/open/v1/lives?size=20`, {
+    headers: {
+      "Client-Id": clientId,
+      "Client-Secret": clientSecret,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!livesRes.ok) return null;
+
+  const livesJson = await livesRes.json();
+  const lives: AnyRecord[] = livesJson?.content?.data ?? [];
+  const found = lives.find((l: AnyRecord) => l.channelId === channelId);
+  if (!found) return { status: "CLOSE" };
+
+  return {
+    status: "OPEN",
+    liveTitle: found.liveTitle ?? null,
+    concurrentUserCount: found.concurrentUserCount ?? 0,
+    liveImageUrl: found.liveThumbnailImageUrl ?? null,
+  };
+}
+
+async function fetchLiveFallback(channelId: string): Promise<AnyRecord | null> {
+  const res = await fetch(
+    `https://api.chzzk.naver.com/service/v2/channels/${channelId}/live-detail`,
+    {
+      method: "GET",
+      headers: {
+        "User-Agent": "OnAir-Community/1.0",
+        "Content-Type": "application/json",
+      },
+    },
+  );
+  if (!res.ok) return null;
+  return await res.json();
+}
+
 Deno.serve(async (req) => {
-  // CORS 프리플라이트 대응
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  const clientId = Deno.env.get("CHZZK_CLIENT_ID");
-  const clientSecret = Deno.env.get("CHZZK_CLIENT_SECRET");
-
-  // 💡 로그 확인: 앞의 4글자만 출력해서 확인 (보안 유지)
-  console.log(`Client ID loaded: ${clientId?.substring(0, 4)}****`);
-  console.log(`Client Secret loaded: ${clientSecret ? "YES" : "NO"}`);
+  const respond = (data: unknown, status = 200) =>
+    new Response(JSON.stringify(data), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status,
+    });
 
   try {
     const url = new URL(req.url);
     const channelId = url.searchParams.get("channelId");
 
-    // channelId가 없으면 바로 에러 반환
     if (!channelId) {
-      console.error("Error: channelId is missing in request");
-      return new Response(JSON.stringify({ error: "channelId is required" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 400,
-      });
+      return respond({ error: "channelId is required" }, 400);
     }
 
-    // const clientId = Deno.env.get("CHZZK_CLIENT_ID");
-    // const clientSecret = Deno.env.get("CHZZK_CLIENT_SECRET");
+    const clientId = Deno.env.get("CHZZK_CLIENT_ID") ?? "";
+    const clientSecret = Deno.env.get("CHZZK_CLIENT_SECRET") ?? "";
 
-    const targetUrl =
-      `https://api.chzzk.naver.com/service/v2/channels/${channelId}/live-detail`;
-
-    const response = await fetch(targetUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-      },
-    });
-
-    const data = await response.json();
-
-    // 만약 네이버에서 에러를 줬다면 로그에 출력
-    if (!response.ok) {
-      console.error("Naver API Error Details:", data);
+    // 공식 API 우선 시도
+    if (clientId && clientSecret) {
+      const official = await fetchLiveViaOpenApi(channelId, clientId, clientSecret);
+      if (official !== null) {
+        return respond({ content: official });
+      }
     }
-    // 2. 결과 반환
-    return new Response(JSON.stringify(data), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+
+    // 폴백: 비공식 API
+    const fallback = await fetchLiveFallback(channelId);
+    return respond(fallback ?? { content: null });
   } catch (err) {
     const message = err instanceof Error ? err.message : "알 수 없는 오류";
-    return new Response(JSON.stringify({ error: message, data: [] }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 400,
-    });
+    return respond({ error: message }, 400);
   }
 });

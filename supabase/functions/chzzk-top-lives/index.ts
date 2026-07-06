@@ -15,11 +15,6 @@ import { corsHeaders } from "../cors.ts";
 // deno-lint-ignore no-explicit-any
 type AnyRecord = Record<string, any>;
 
-const SEARCH_HEADERS = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-  "Accept": "application/json",
-};
-
 async function fetchViaOpenApi(clientId: string, clientSecret: string, size: number): Promise<AnyRecord[]> {
   const res = await fetch(`https://openapi.chzzk.naver.com/open/v1/lives?size=${size}`, {
     headers: {
@@ -42,63 +37,6 @@ async function fetchViaOpenApi(clientId: string, clientSecret: string, size: num
       liveTitle: live.liveTitle ?? null,
       liveThumbnailUrl: live.liveThumbnailImageUrl ?? null,
     }));
-}
-
-async function fetchByKeyword(keyword: string, size: number): Promise<AnyRecord[]> {
-  const searchRes = await fetch(
-    `https://api.chzzk.naver.com/service/v1/search/channels?keyword=${encodeURIComponent(keyword)}&size=${size}`,
-    { headers: SEARCH_HEADERS },
-  );
-  if (!searchRes.ok) return [];
-
-  const searchJson = await searchRes.json();
-  const rawChannels: AnyRecord[] = searchJson?.content?.data ?? [];
-  if (rawChannels.length === 0) return [];
-
-  const liveChannels: AnyRecord[] = [];
-  await Promise.all(
-    rawChannels.map(async (item: AnyRecord) => {
-      const channel = item.channel;
-      if (!channel?.channelId) return;
-      try {
-        const liveRes = await fetch(
-          `https://api.chzzk.naver.com/polling/v2/channels/${channel.channelId}/live-status`,
-          { headers: SEARCH_HEADERS },
-        );
-        if (!liveRes.ok) return;
-        const liveJson = await liveRes.json();
-        const content = liveJson?.content;
-        if (content?.status !== "OPEN") return;
-        liveChannels.push({
-          channelId: channel.channelId,
-          channelName: channel.channelName ?? "",
-          channelImageUrl: channel.channelImageUrl ?? null,
-          concurrentUserCount: content.concurrentUserCount ?? 0,
-          liveTitle: content.liveTitle ?? null,
-          liveThumbnailUrl: content.liveImageUrl?.replace("{type}", "1080") ?? null,
-        });
-      } catch (_) { /* ignore */ }
-    }),
-  );
-  return liveChannels;
-}
-
-async function fetchFallback(topN: number): Promise<AnyRecord[]> {
-  const seeds = ["이", "김", "박", "최", "정", "강"];
-  const seen = new Set<string>();
-  const all: AnyRecord[] = [];
-
-  const results = await Promise.allSettled(seeds.map((kw) => fetchByKeyword(kw, 10)));
-  for (const r of results) {
-    if (r.status !== "fulfilled") continue;
-    for (const ch of r.value) {
-      if (seen.has(ch.channelId)) continue;
-      seen.add(ch.channelId);
-      all.push(ch);
-    }
-  }
-
-  return all.sort((a, b) => b.concurrentUserCount - a.concurrentUserCount).slice(0, topN);
 }
 
 Deno.serve(async (req: Request) => {
@@ -124,16 +62,11 @@ Deno.serve(async (req: Request) => {
     const clientId = Deno.env.get("CHZZK_CLIENT_ID") ?? "";
     const clientSecret = Deno.env.get("CHZZK_CLIENT_SECRET") ?? "";
 
-    let data: AnyRecord[] = [];
-
-    if (clientId && clientSecret) {
-      data = await fetchViaOpenApi(clientId, clientSecret, topN);
+    if (!clientId || !clientSecret) {
+      return ok({ data: [] });
     }
 
-    if (data.length === 0) {
-      data = await fetchFallback(topN);
-    }
-
+    const data = await fetchViaOpenApi(clientId, clientSecret, topN);
     return ok({ data });
   } catch (err) {
     const message = err instanceof Error ? err.message : "알 수 없는 오류";
