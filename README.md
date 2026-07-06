@@ -93,6 +93,11 @@
 
 - Vercel
 
+```
+// 재배포 시
+vercel --prod
+```
+
 ## 기술 선택 이유
 
 React

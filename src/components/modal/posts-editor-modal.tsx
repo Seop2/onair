@@ -206,7 +206,7 @@ export default function PostEditorModal() {
               <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
                 <span className="text-primary">@</span>
                 {selectedChannel.channelName}
-                <button type="button" onClick={() => setSelectedChannel(null)}>
+                <button type="button" onClick={() => setSelectedChannel(null)} aria-label="채널 선택 해제">
                   <XIcon className="hover:text-destructive h-3 w-3 cursor-pointer" />
                 </button>
               </Badge>
@@ -264,6 +264,7 @@ export default function PostEditorModal() {
                       type="button"
                       className="absolute top-1 right-1 rounded-full bg-black/50 p-1 transition hover:bg-black/70"
                       onClick={() => handleDeleteMedia(media)}
+                      aria-label="미디어 삭제"
                     >
                       <XIcon className="h-4 w-4 text-white" />
                     </button>

@@ -91,6 +91,7 @@ export default function LiveStreamersSidebar({
               onClick={() => refetch()}
               disabled={isRefetching}
               className="hover:text-foreground transition-colors"
+              aria-label="라이브 목록 새로고침"
             >
               <RefreshCw
                 className={`h-3.5 w-3.5 ${isRefetching ? "animate-spin" : ""}`}

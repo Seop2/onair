@@ -62,6 +62,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
           <button
             onClick={handleClear}
             className="text-muted-foreground hover:text-foreground ml-auto"
+            aria-label="스트리머 필터 해제"
           >
             <X className="h-4 w-4" />
           </button>
