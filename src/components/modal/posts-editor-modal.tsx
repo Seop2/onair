@@ -252,6 +252,7 @@ export default function PostEditorModal() {
                       <img
                         src={media.previewUrl}
                         className="h-full w-full object-cover"
+                        alt="업로드한 이미지 미리보기"
                       />
                     ) : (
                       <video

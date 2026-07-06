@@ -109,6 +109,7 @@ export default function ProfileEditorModal() {
                 }}
                 src={avatarImage?.previewUrl || profile.avatar || defaultAvatar}
                 className="h-20 w-20 cursor-pointer rounded-full object-cover"
+                alt="프로필 이미지 변경"
               />
             </div>
 

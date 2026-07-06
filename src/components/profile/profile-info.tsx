@@ -24,6 +24,7 @@ export default function ProfileInfo({ userId }: { userId: string }) {
       <img
         src={profile.avatar || defaultAvatar}
         className="h-30 w-30 rounded-full object-cover"
+        alt={`${profile.nickname}의 프로필 이미지`}
       />
       <div className="flex flex-col items-center gap-2">
         <div className="text-xl font-bold">{profile.nickname}</div>

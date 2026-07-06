@@ -21,6 +21,7 @@ export default function ProfileButton() {
         <img
           src={profile?.avatar || defaultAvatar}
           className="h-6 w-6 cursor-pointer rounded-full object-cover"
+          alt="내 프로필 이미지"
         />
       </PopoverTrigger>
       <PopoverContent className="flex w-40 flex-col p-0">

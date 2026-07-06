@@ -64,6 +64,7 @@ export default function CommentItem(props: NestedComment) {
             <img
               className="h-10 w-10 rounded-full object-cover"
               src={props.author.avatar || defaultAvatar}
+              alt={`${props.author.nickname}의 프로필 이미지`}
             />
           </div>
         </Link>
