@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /forget-password
+Disallow: /reset-password
+
+Sitemap: https://onair-forum.vercel.app/sitemap.xml
