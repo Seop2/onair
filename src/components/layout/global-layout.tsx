@@ -37,6 +37,17 @@ export default function GlobalLayout() {
         <p className="mt-3 text-xs opacity-60">
           OnAir는 NAVER 치지직(CHZZK)과 공식 제휴 관계가 없는 팬 커뮤니티입니다.
         </p>
+        <p className="mt-1 text-xs opacity-60">
+          Icon by{" "}
+          <a
+            href="https://icons8.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Icons8
+          </a>
+        </p>
       </footer>
     </div>
   );
