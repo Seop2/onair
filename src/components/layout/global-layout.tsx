@@ -27,7 +27,12 @@ export default function GlobalLayout() {
         <Outlet />
       </main>
       <footer className="text-muted-foreground border-t py-10 text-center text-sm">
-        lk9050@naver.com
+        <p>lk9050@naver.com</p>
+        <p className="mt-2">
+          <Link to="/privacy-policy" className="hover:underline">
+            개인정보처리방침
+          </Link>
+        </p>
       </footer>
     </div>
   );

@@ -2,16 +2,26 @@ import { PlusCircleIcon } from "lucide-react";
 import { useOpenCreatePostModal } from "@/store/post-editor-modal";
 import { useSession } from "@/store/session";
 import defaultAvatar from "@/assets/default-avatar.png";
+import { useNavigate } from "react-router";
 
 export default function CreatePostButton() {
   const openCreatePostModal = useOpenCreatePostModal();
   const session = useSession();
+  const navigate = useNavigate();
   const avatar = session?.user.user_metadata?.avatar_url ?? defaultAvatar;
+
+  const handleClick = () => {
+    if (!session) {
+      navigate("/sign-in");
+      return;
+    }
+    openCreatePostModal();
+  };
 
   return (
     <button
       type="button"
-      onClick={openCreatePostModal}
+      onClick={handleClick}
       className="group flex w-full cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 transition-colors hover:border-[#00ffa3]/30 hover:bg-[#00ffa3]/5"
     >
       <img

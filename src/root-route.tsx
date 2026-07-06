@@ -5,6 +5,7 @@ import ForgetPasswordPage from "./pages/forget-password-page";
 import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
 import ResetPasswordPage from "./pages/reset-password-page";
+import PrivacyPolicyPage from "./pages/privacy-policy-page";
 import GlobalLayout from "./components/layout/global-layout";
 import AuthLayout from "./components/layout/auth-layout";
 import IndexPage from "./pages/index-page";
@@ -22,12 +23,17 @@ export default function RootRoute() {
 
       {/* 일반 페이지: 헤더/푸터 포함 */}
       <Route element={<GlobalLayout />}>
+        {/* 비로그인도 접근 가능한 공개 페이지 */}
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/post/:postId" element={<PostDetailPage />} />
+        <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+
+        {/* 로그인 필수 페이지 */}
         <Route element={<MemberOnlyLayout />}>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/post/:postId" element={<PostDetailPage />} />
-          <Route path="/profile/:userId" element={<ProfileDetailPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
         </Route>
+
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
