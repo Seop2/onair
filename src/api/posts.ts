@@ -20,7 +20,7 @@ export async function fetchPosts({
   const request = supabase
     .from("post")
     .select("*, author: profile!author_id(*), myLiked: like!post_id (*)")
-    .eq("like.user_id", userId ?? "")
+    .eq("like.user_id", userId ?? "00000000-0000-0000-0000-000000000000")
     .order(sortBy, { ascending: false })
     .range(from, to);
 
