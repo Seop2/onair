@@ -24,9 +24,13 @@ export default function LikePostButton({
   });
 
   const handleLikeClick = () => {
+    if (!session) {
+      toast.error("로그인이 필요합니다.", { position: "top-center" });
+      return;
+    }
     togglePostLike({
       postId: id,
-      userId: session!.user.id,
+      userId: session.user.id,
     });
   };
 

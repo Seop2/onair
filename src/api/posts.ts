@@ -116,12 +116,12 @@ export async function fetchPostById({
   userId,
 }: {
   postId: number;
-  userId: string;
+  userId?: string;
 }) {
   const { data, error } = await supabase
     .from("post")
     .select("*, author: profile!author_id(*), myLiked: like!post_id (*)")
-    .eq("like.user_id", userId)
+    .eq("like.user_id", userId ?? "00000000-0000-0000-0000-000000000000")
     .eq("id", postId)
     .single();
   if (error) throw error;
