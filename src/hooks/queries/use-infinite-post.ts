@@ -14,7 +14,7 @@ export function useInfinitePostData(
   channelId?: string,
 ) {
   const session = useSession();
-  const userId = session!.user.id;
+  const userId = session?.user.id;
   const queryClient = useQueryClient();
 
   return useInfiniteQuery({
