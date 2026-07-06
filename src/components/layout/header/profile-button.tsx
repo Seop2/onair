@@ -14,7 +14,15 @@ export default function ProfileButton() {
   //로그인 유무 확인
   const session = useSession();
   const { data: profile } = useProfileData(session?.user.id); //프로필 정보
-  if (!session) return null;
+  if (!session)
+    return (
+      <Link
+        to="/sign-in"
+        className="rounded-lg bg-[#00ffa3] px-3 py-1.5 text-sm font-semibold text-black transition-opacity hover:opacity-80"
+      >
+        로그인
+      </Link>
+    );
   return (
     <Popover>
       <PopoverTrigger>
