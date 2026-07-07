@@ -13,6 +13,7 @@ interface StreamerFilterProps {
   onSelect: (channel: SelectedChannel | null) => void;
 }
 
+/** 치지직 채널 검색 및 선택으로 피드를 특정 스트리머 기준으로 필터링하는 입력 컴포넌트 */
 export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState<SelectedChannel | null>(null);
@@ -56,7 +57,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
             alt={selected.channelName}
             className="h-5 w-5 rounded-full object-cover"
           />
-          <span className="text-sm font-bold text-[#00ffa3]">
+          <span className="text-sm font-bold text-[#00cc82]">
             {selected.channelName}
           </span>
           <button
@@ -84,7 +85,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
       )}
 
       {open && !selected && results.length > 0 && (
-        <ul className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border shadow-lg">
+        <ul className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border">
           {results.map((ch) => (
             <li key={ch.channelId}>
               <button
@@ -100,7 +101,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
                 <div>
                   <div className="text-sm font-medium">{ch.channelName}</div>
                   {ch.isLive && (
-                    <div className="text-xs text-red-500">
+                    <div className="text-xs text-[#ef4444]">
                       LIVE · {ch.concurrentUserCount.toLocaleString()}명
                     </div>
                   )}
@@ -112,7 +113,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
       )}
 
       {open && !selected && isFetching && (
-        <div className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border px-3 py-2 text-sm text-muted-foreground shadow-lg">
+        <div className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border px-3 py-2 text-sm text-muted-foreground">
           검색 중...
         </div>
       )}

@@ -7,6 +7,7 @@ interface PostChannelTagProps {
   viewerCount: string;
 }
 
+/** 게시글에 태그된 치지직 채널을 표시하며, 클릭 시 해당 채널 라이브 페이지로 이동 */
 export default function PostChannelTag({
   channelId,
   channelName,
@@ -27,7 +28,7 @@ export default function PostChannelTag({
         onClick={handleClick}
         className={`group flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 transition-all ${
           isLive
-            ? "border-red-500/50 bg-red-500/10 hover:bg-red-500/20"
+            ? "border-[#ef4444]/50 bg-[#ef4444]/10 hover:bg-[#ef4444]/20"
             : "border-[#00ffa3]/20 bg-[#00ffa3]/10 hover:bg-[#00ffa3]/20"
         }`}
       >
@@ -37,17 +38,17 @@ export default function PostChannelTag({
           {isLive && (
             <span className="absolute -top-0.5 -right-0.5 flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#ef4444]" />
             </span>
           )}
         </div>
 
-        <span className="text-xs font-bold text-[#00ffa3]">{channelName}</span>
+        <span className="text-xs font-bold text-[#00cc82]">{channelName}</span>
 
         {isLive && (
-          <div className="ml-1 flex items-center gap-1 border-l border-red-500/30 pl-2">
-            <Radio className="h-2.5 w-2.5 animate-pulse text-red-500" />
-            <span className="text-[10px] font-black text-red-500">
+          <div className="ml-1 flex items-center gap-1 border-l border-[#ef4444]/30 pl-2">
+            <Radio className="h-2.5 w-2.5 animate-pulse text-[#ef4444]" />
+            <span className="text-[10px] font-black text-[#ef4444]">
               LIVE {viewerCount}
             </span>
           </div>

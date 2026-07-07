@@ -20,7 +20,7 @@ function StreamerRow({
       {/* 순위 */}
       <span
         className={`w-6 shrink-0 text-center text-lg font-bold tabular-nums ${
-          rank <= 3 ? "text-foreground" : "text-muted-foreground"
+          rank <= 3 ? "text-[#00cc82]" : "text-muted-foreground"
         }`}
       >
         {rank}
@@ -30,7 +30,7 @@ function StreamerRow({
       <img
         src={streamer.channelImageUrl ?? defaultAvatar}
         alt={streamer.channelName}
-        className="h-12 w-12 shrink-0 rounded-full object-cover"
+        className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-[#00ffa3]/40"
       />
 
       {/* 채널명 + 방송 제목 */}
@@ -45,7 +45,7 @@ function StreamerRow({
 
       {/* 시청자 수 */}
       <div className="flex shrink-0 items-center gap-1">
-        <span className="h-2 w-2 rounded-full bg-red-500" />
+        <span className="h-2 w-2 rounded-full bg-[#ef4444]" />
         <span className="text-sm font-bold tabular-nums">
           {streamer.concurrentUserCount.toLocaleString()}명
         </span>
@@ -58,6 +58,7 @@ interface LiveStreamersSidebarProps {
   onSelectChannel: (channelId: string, channelName: string, channelImageUrl: string | null) => void;
 }
 
+/** 인기 라이브 스트리머 목록을 순위별로 표시하는 우측 사이드바 (데스크톱 전용) */
 export default function LiveStreamersSidebar({
   onSelectChannel,
 }: LiveStreamersSidebarProps) {
@@ -76,12 +77,12 @@ export default function LiveStreamersSidebar({
 
   return (
     <aside className="w-72 shrink-0">
-      <div className="sticky top-6 rounded-2xl border bg-card shadow-sm">
+      <div className="sticky top-6 rounded-xl border bg-card">
         {/* 헤더 */}
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
             <span className="text-base font-bold">지금 방송 중</span>
-            <span className="rounded-full bg-pink-400 px-2 py-0.5 text-[11px] font-bold text-white">
+            <span className="rounded-full bg-[#ef4444] px-2 py-0.5 text-[11px] font-bold text-white">
               LIVE
             </span>
           </div>
@@ -108,11 +109,11 @@ export default function LiveStreamersSidebar({
                 key={i}
                 className="flex items-center gap-4 border-t px-2 py-3 first:border-t-0"
               >
-                <div className="bg-muted h-5 w-5 animate-pulse rounded" />
-                <div className="bg-muted h-12 w-12 animate-pulse rounded-full" />
+                <div className="h-5 w-5 animate-pulse rounded bg-muted" />
+                <div className="h-12 w-12 animate-pulse rounded-full bg-muted" />
                 <div className="flex-1 space-y-2">
-                  <div className="bg-muted h-3 w-24 animate-pulse rounded" />
-                  <div className="bg-muted h-3 w-32 animate-pulse rounded" />
+                  <div className="h-3 w-24 animate-pulse rounded bg-muted" />
+                  <div className="h-3 w-32 animate-pulse rounded bg-muted" />
                 </div>
               </div>
             ))}

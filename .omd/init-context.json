@@ -1,0 +1,29 @@
+{
+  "reference_id": "twitch",
+  "description": "치지직 시청자들이 방송 관련 이야기를 나누는 공간",
+  "mode": "inspired",
+  "delta_set": {
+    "axes": {
+      "color.hue_deg": -109,
+      "color.saturation_pct": 0,
+      "color.lightness_pct": -21,
+      "radius.delta_px": 2,
+      "density.shift": 0
+    },
+    "voiceHints": [
+      "Korean community-native",
+      "fan-first",
+      "live-moment immediacy"
+    ],
+    "matchedKeywords": [
+      "dark",
+      "dense",
+      "bold",
+      "immersive",
+      "community",
+      "live-streaming"
+    ],
+    "warnings": []
+  },
+  "bootstrapped_at": "2026-07-07T00:00:00Z"
+}

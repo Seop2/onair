@@ -10,6 +10,7 @@ import { PopoverClose } from "@radix-ui/react-popover";
 import { Link } from "react-router";
 import { signOut } from "@/api/auth";
 
+/** 비로그인 시 로그인 버튼, 로그인 시 프로필 이동·로그아웃 팝오버를 표시하는 헤더 버튼 */
 export default function ProfileButton() {
   //로그인 유무 확인
   const session = useSession();
@@ -18,7 +19,7 @@ export default function ProfileButton() {
     return (
       <Link
         to="/sign-in"
-        className="rounded-lg bg-[#00ffa3] px-3 py-1.5 text-sm font-semibold text-black transition-opacity hover:opacity-80"
+        className="rounded-full bg-[#00ffa3] px-4 py-1.5 text-sm font-semibold text-black transition-opacity hover:opacity-80"
       >
         로그인
       </Link>

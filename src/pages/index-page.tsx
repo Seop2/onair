@@ -39,14 +39,14 @@ function ChannelBanner({
       <div className="relative flex items-center gap-4 px-4 py-3">
         <img
           src={channel.channelImageUrl ?? defaultAvatar}
-          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-[#00ffa3]/40"
+          className={`h-10 w-10 shrink-0 rounded-full object-cover ${live ? "ring-2 ring-[#00ffa3]/40" : ""}`}
           alt={channel.channelName}
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold">{channel.channelName}</span>
             {live && (
-              <span className="rounded bg-red-500 px-1.5 py-0.5 text-[10px] font-extrabold text-white">
+              <span className="rounded bg-[#ef4444] px-1.5 py-0.5 text-[10px] font-extrabold text-white">
                 LIVE
               </span>
             )}
@@ -72,7 +72,7 @@ function ChannelBanner({
               href={`https://chzzk.naver.com/live/${channel.channelId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 rounded-lg border border-[#00ffa3]/20 bg-[#00ffa3]/10 px-3 py-1.5 text-xs font-bold text-[#00ffa3] transition-colors hover:bg-[#00ffa3]/20"
+              className="flex items-center gap-1 rounded-full border border-[#00ffa3]/20 bg-[#00ffa3]/10 px-3 py-1.5 text-xs font-bold text-[#00ffa3] transition-colors hover:bg-[#00ffa3]/20"
             >
               방송 보기
               <ExternalLink className="h-3 w-3" />
@@ -91,6 +91,7 @@ function ChannelBanner({
   );
 }
 
+/** 라이브 바·피드·채널 필터·정렬·우측 사이드바를 포함하는 메인 홈 페이지 */
 export default function IndexPage() {
   const [sortBy, setSortBy] = useState<"created_at" | "like_count">(
     "created_at",
@@ -151,20 +152,20 @@ export default function IndexPage() {
             <div className="flex shrink-0 gap-2">
               <button
                 onClick={() => setSortBy("created_at")}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
                   sortBy === "created_at"
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-input bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    ? "bg-[#00ffa3] text-black"
+                    : "border text-muted-foreground hover:border-[#00ffa3]/30 hover:text-[#00ffa3]"
                 }`}
               >
                 최신순
               </button>
               <button
                 onClick={() => setSortBy("like_count")}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
                   sortBy === "like_count"
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-input bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    ? "bg-[#00ffa3] text-black"
+                    : "border text-muted-foreground hover:border-[#00ffa3]/30 hover:text-[#00ffa3]"
                 }`}
               >
                 ❤ 좋아요순

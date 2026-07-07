@@ -20,6 +20,7 @@ interface PostItemProps {
   type: "FEED" | "DETAIL";
 }
 
+/** 게시글 단건을 피드(목록 미리보기) 또는 상세 모드로 렌더링하는 카드 컴포넌트 */
 export default function PostItem({ postId, type }: PostItemProps) {
   const session = useSession();
   const userId = session?.user.id;
@@ -99,7 +100,7 @@ export default function PostItem({ postId, type }: PostItemProps) {
         />
         {type === "FEED" && (
           <Link to={`/post/${post.id}`}>
-            <div className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-xl border-1 p-2 px-4 text-sm">
+            <div className="hover:border-[#00ffa3]/30 hover:bg-[#00ffa3]/5 hover:text-[#00ffa3] flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors">
               <MessageCircle className="h-4 w-4" />
               <span>{commentCount}</span>
             </div>
