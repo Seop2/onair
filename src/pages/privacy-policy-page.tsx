@@ -1,3 +1,4 @@
+/** 개인정보처리방침 정적 콘텐츠 페이지 */
 export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto max-w-2xl py-10">

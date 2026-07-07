@@ -10,6 +10,7 @@ import {
 } from "../ui/alert-dialog";
 import { useAlertModal } from "@/store/alert-modal";
 
+/** Zustand 스토어로 제어되는 전역 확인/취소 알림 다이얼로그 */
 export default function AlertModal() {
   const store = useAlertModal();
 

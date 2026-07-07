@@ -11,6 +11,7 @@ function isVideoFile(url: string) {
   return VIDEO_EXTENSIONS.some((ext) => url.toLowerCase().endsWith(ext));
 }
 
+/** 게시글 첨부 이미지/동영상을 캐러셀로 표시 (피드: 자동재생, 상세: 컨트롤 표시) */
 export default function PostMediaCarousel({
   mediaUrls,
   type,

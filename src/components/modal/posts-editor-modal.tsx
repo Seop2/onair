@@ -337,7 +337,7 @@ export default function PostEditorModal() {
                           {item.channelName}
                         </span>
                         {item.isLive && (
-                          <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-0.5 text-xs text-red-500">
+                          <span className="flex items-center gap-1 rounded-full bg-[#ef4444]/20 px-2 py-0.5 text-xs text-[#ef4444]">
                             <Radio className="h-2.5 w-2.5 animate-pulse" />
                             LIVE
                           </span>

@@ -4,6 +4,7 @@ import { useSession } from "@/store/session";
 import defaultAvatar from "@/assets/default-avatar.png";
 import { useNavigate } from "react-router";
 
+/** 클릭 시 게시글 작성 모달을 여는 버튼 (비로그인 시 로그인 페이지로 이동) */
 export default function CreatePostButton() {
   const openCreatePostModal = useOpenCreatePostModal();
   const session = useSession();

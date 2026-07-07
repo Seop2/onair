@@ -5,6 +5,7 @@ import defaultAvatar from "@/assets/default-avatar.png";
 import { useSession } from "@/store/session";
 import EditProfileButton from "./edit-profile-button";
 
+/** 사용자 프로필 이미지·닉네임·소개를 표시하고, 본인 프로필이면 수정 버튼을 노출 */
 export default function ProfileInfo({ userId }: { userId: string }) {
   const session = useSession();
 

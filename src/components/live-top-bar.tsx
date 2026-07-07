@@ -16,6 +16,7 @@ interface LiveTopBarProps {
   ) => void;
 }
 
+/** 상단에 가로 스크롤로 현재 라이브 중인 스트리머 채널 칩을 표시하는 바 */
 export default function LiveTopBar({
   selectedChannelId,
   onSelect,
@@ -25,8 +26,8 @@ export default function LiveTopBar({
   return (
     <div className="flex items-center gap-3 border-b pb-3">
       <div className="flex shrink-0 items-center gap-1.5">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-        <span className="text-[11px] font-extrabold tracking-widest text-red-500">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ef4444]" />
+        <span className="text-[11px] font-extrabold tracking-widest text-[#ef4444]">
           LIVE
         </span>
       </div>

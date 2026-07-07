@@ -32,6 +32,7 @@ function toNestedComments(comments: Comment[]): NestedComment[] {
 
   return result;
 }
+/** 특정 게시글의 댓글 목록을 계층 구조(루트 댓글 + 대댓글)로 렌더링 */
 export default function CommentList(props: { postId: number }) {
   const {
     data: comments,

@@ -25,6 +25,9 @@ lerna-debug.log*
 # vercel
 .vercel
 
+# claude
+.claude
+
 # editor files
 .vscode/*
 !.vscode/extensions.json
