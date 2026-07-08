@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ExternalLink, X } from "lucide-react";
-import CreatePostButton from "@/components/posts/create-post-button";
+import { useSearchParams } from "react-router";
 import PostFeed from "../components/posts/post-feed";
 import StreamerFilter from "@/components/posts/streamer-filter";
 import LiveStreamersSidebar from "@/components/live-streamers-sidebar";
-import LiveTopBar from "@/components/live-top-bar";
 import { useTopLiveStreamers } from "@/hooks/queries/use-top-live-streamers";
 import defaultAvatar from "@/assets/default-avatar.png";
 
@@ -13,6 +12,14 @@ interface SelectedChannel {
   channelName: string;
   channelImageUrl: string | null;
 }
+
+const TABS = [
+  { id: "all", label: "전체" },
+  { id: "popular", label: "인기" },
+  { id: "latest", label: "최신" },
+] as const;
+
+type TabId = (typeof TABS)[number]["id"];
 
 function ChannelBanner({
   channel,
@@ -25,7 +32,7 @@ function ChannelBanner({
   const live = streamers?.find((s) => s.channelId === channel.channelId);
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-card">
+    <div className="relative overflow-hidden rounded-[10px] border bg-card">
       {live?.liveThumbnailUrl && (
         <>
           <img
@@ -91,14 +98,23 @@ function ChannelBanner({
   );
 }
 
-/** 라이브 바·피드·채널 필터·정렬·우측 사이드바를 포함하는 메인 홈 페이지 */
 export default function IndexPage() {
-  const [sortBy, setSortBy] = useState<"created_at" | "like_count">(
-    "created_at",
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedChannel, setSelectedChannel] =
     useState<SelectedChannel | null>(null);
   const [filterKey, setFilterKey] = useState(0);
+
+  const sortParam = searchParams.get("sort");
+  const activeTab: TabId =
+    sortParam === "like_count" ? "popular" : sortParam === "created_at" ? "latest" : "all";
+  const sortBy: "created_at" | "like_count" =
+    activeTab === "popular" ? "like_count" : "created_at";
+
+  function handleTabChange(tab: TabId) {
+    if (tab === "popular") setSearchParams({ sort: "like_count" });
+    else if (tab === "latest") setSearchParams({ sort: "created_at" });
+    else setSearchParams({});
+  }
 
   function handleSelectChannel(
     channelId: string,
@@ -115,71 +131,53 @@ export default function IndexPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* 상단 라이브 스트리머 바 */}
-      <LiveTopBar
-        selectedChannelId={selectedChannel?.channelId}
-        onSelect={handleSelectChannel}
-      />
+    <div className="flex gap-8">
+      {/* 메인 피드 */}
+      <div className="flex min-w-0 flex-1 flex-col gap-4">
+        {/* 선택된 채널 배너 */}
+        {selectedChannel && (
+          <ChannelBanner channel={selectedChannel} onClear={handleClearChannel} />
+        )}
 
-      <div className="flex gap-8">
-        {/* 메인 피드 */}
-        <div className="flex min-w-0 flex-1 flex-col gap-4">
-          {/* 선택된 채널 배너 */}
-          {selectedChannel && (
-            <ChannelBanner channel={selectedChannel} onClear={handleClearChannel} />
-          )}
+        {/* 스트리머 필터 */}
+        <StreamerFilter
+          key={filterKey}
+          onSelect={(channel) => {
+            if (channel) {
+              handleSelectChannel(
+                channel.channelId,
+                channel.channelName,
+                channel.channelImageUrl,
+              );
+            } else {
+              handleClearChannel();
+            }
+          }}
+        />
 
-          {/* 글 작성 */}
-          <CreatePostButton />
-
-          {/* 필터 & 정렬 */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <StreamerFilter
-              key={filterKey}
-              onSelect={(channel) => {
-                if (channel) {
-                  handleSelectChannel(
-                    channel.channelId,
-                    channel.channelName,
-                    channel.channelImageUrl,
-                  );
-                } else {
-                  handleClearChannel();
-                }
-              }}
-            />
-            <div className="flex shrink-0 gap-2">
-              <button
-                onClick={() => setSortBy("created_at")}
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-                  sortBy === "created_at"
-                    ? "bg-[#00ffa3] text-black"
-                    : "border text-muted-foreground hover:border-[#00ffa3]/30 hover:text-[#00ffa3]"
-                }`}
-              >
-                최신순
-              </button>
-              <button
-                onClick={() => setSortBy("like_count")}
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-                  sortBy === "like_count"
-                    ? "bg-[#00ffa3] text-black"
-                    : "border text-muted-foreground hover:border-[#00ffa3]/30 hover:text-[#00ffa3]"
-                }`}
-              >
-                ❤ 좋아요순
-              </button>
-            </div>
-          </div>
-
-          <PostFeed sortBy={sortBy} channelId={selectedChannel?.channelId} />
+        {/* 카테고리 탭 */}
+        <div className="flex gap-0 border-b">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => handleTabChange(tab.id)}
+              className={`-mb-px border-b-2 px-5 py-2.5 text-sm font-semibold transition-colors ${
+                activeTab === tab.id
+                  ? "border-[#00ffa3] text-[#00ffa3]"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* 우측 사이드바 */}
-        <div className="hidden lg:block">
-          <LiveStreamersSidebar onSelectChannel={handleSelectChannel} />
-        </div>
+        <PostFeed sortBy={sortBy} channelId={selectedChannel?.channelId} />
+      </div>
+
+      {/* 우측 사이드바 */}
+      <div className="hidden lg:block">
+        <LiveStreamersSidebar onSelectChannel={handleSelectChannel} />
       </div>
     </div>
   );

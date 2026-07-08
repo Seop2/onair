@@ -20,6 +20,11 @@ export const QUERY_KEYS = {
     channel: (channelId: string) => ["chzzk", "channel", channelId],
     search: (keyword: string) => ["chzzk", "search", keyword],
   },
+  notice: {
+    all: ["notice"],
+    list: ["notice", "list"],
+    latest: ["notice", "latest"],
+  },
 };
 
 export const BUCKET_NAME = "uploads";

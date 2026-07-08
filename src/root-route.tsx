@@ -6,6 +6,7 @@ import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
 import ResetPasswordPage from "./pages/reset-password-page";
 import PrivacyPolicyPage from "./pages/privacy-policy-page";
+import NoticePage from "./pages/notice-page";
 import GlobalLayout from "./components/layout/global-layout";
 import AuthLayout from "./components/layout/auth-layout";
 import IndexPage from "./pages/index-page";
@@ -28,6 +29,7 @@ export default function RootRoute() {
         <Route path="/post/:postId" element={<PostDetailPage />} />
         <Route path="/profile/:userId" element={<ProfileDetailPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/notice" element={<NoticePage />} />
 
         {/* 로그인 필수 페이지 */}
         <Route element={<MemberOnlyLayout />}>

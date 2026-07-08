@@ -5,6 +5,7 @@
 import { type Database } from "./database.types";
 
 export type CommentEntity = Database["public"]["Tables"]["comment"]["Row"];
+export type NoticeEntity = Database["public"]["Tables"]["notice"]["Row"];
 export type PostEntity = Database["public"]["Tables"]["post"]["Row"];
 export type ProfileEntity = Database["public"]["Tables"]["profile"]["Row"];
 export type Post = PostEntity & { author: ProfileEntity; isLiked: boolean }; //사용자 정보를 포함한 게시글

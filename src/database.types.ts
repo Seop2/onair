@@ -102,6 +102,27 @@ export type Database = {
           },
         ]
       }
+      notice: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
       post: {
         Row: {
           author_id: string
