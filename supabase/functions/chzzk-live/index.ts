@@ -18,7 +18,7 @@ async function fetchLiveViaOpenApi(
   clientSecret: string,
 ): Promise<AnyRecord | null> {
   // 공식 API의 라이브 목록(최대 20개)에서 해당 채널 존재 여부 확인
-  const livesRes = await fetch(`https://openapi.chzzk.naver.com/open/v1/lives?size=20`, {
+  const livesRes = await fetch(`https://openapi.chzzk.naver.com/open/v1/lives?size=100`, {
     headers: {
       "Client-Id": clientId,
       "Client-Secret": clientSecret,
@@ -30,7 +30,7 @@ async function fetchLiveViaOpenApi(
   const livesJson = await livesRes.json();
   const lives: AnyRecord[] = livesJson?.content?.data ?? [];
   const found = lives.find((l: AnyRecord) => l.channelId === channelId);
-  if (!found) return { status: "CLOSE" };
+  if (!found) return null;
 
   return {
     status: "OPEN",
