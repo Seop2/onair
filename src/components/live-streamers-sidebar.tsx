@@ -20,7 +20,7 @@ function StreamerRow({
       {/* 순위 */}
       <span
         className={`w-5 shrink-0 text-center text-sm font-bold tabular-nums ${
-          rank <= 3 ? "text-[#00cc82]" : "text-muted-foreground"
+          rank <= 3 ? "text-mint-deep" : "text-muted-foreground"
         }`}
       >
         {rank}
@@ -30,7 +30,7 @@ function StreamerRow({
       <img
         src={streamer.channelImageUrl ?? defaultAvatar}
         alt={streamer.channelName}
-        className="h-9 w-9 shrink-0 rounded-full object-cover ring-2 ring-[#00ffa3]/40"
+        className="h-9 w-9 shrink-0 rounded-full object-cover ring-2 ring-mint/40"
       />
 
       {/* 채널명 + 방송 제목 */}
@@ -45,7 +45,7 @@ function StreamerRow({
 
       {/* 시청자 수 */}
       <div className="flex shrink-0 items-center gap-1">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#ef4444]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-live" />
         <span className="text-xs font-bold tabular-nums">
           {streamer.concurrentUserCount >= 10000
             ? `${(streamer.concurrentUserCount / 10000).toFixed(1)}만`
@@ -79,12 +79,12 @@ export default function LiveStreamersSidebar({
     <aside className="w-72 shrink-0 space-y-3">
       {/* 라이브 스트리머 TOP 10 */}
       <div className="sticky top-20 space-y-3">
-        <div className="rounded-[10px] border bg-card">
+        <div className="rounded-lg border bg-card">
           {/* 헤더 */}
           <div className="flex items-center justify-between px-3 py-2.5">
             <div className="flex items-center gap-2">
               <span className="text-sm font-bold">지금 라이브 중인 스트리머</span>
-              <span className="rounded bg-[#ef4444] px-1.5 py-0.5 text-[10px] font-extrabold text-white">
+              <span className="rounded bg-live px-1.5 py-0.5 text-[10px] font-extrabold text-white">
                 TOP 10
               </span>
             </div>
@@ -150,7 +150,7 @@ export default function LiveStreamersSidebar({
               href="https://chzzk.naver.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#00cc82] flex w-full items-center justify-center gap-1 text-xs font-medium transition-colors"
+              className="text-muted-foreground hover:text-mint-deep flex w-full items-center justify-center gap-1 text-xs font-medium transition-colors"
             >
               치지직에서 더보기
               <span className="text-[10px]">›</span>
@@ -159,7 +159,7 @@ export default function LiveStreamersSidebar({
         </div>
 
         {/* 커뮤니티 이용 가이드 */}
-        <div className="rounded-[10px] border bg-card px-4 py-3">
+        <div className="rounded-lg border bg-card px-4 py-3">
           <div className="mb-2 flex items-center gap-1.5 text-sm font-bold">
             <span>📋</span>
             <span>커뮤니티 이용 가이드</span>

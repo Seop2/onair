@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Play } from "lucide-react";
 import defaultAvatar from "@/assets/default-avatar.png";
 import { formatTimeAgo } from "@/lib/time";
 import DeletePostButton from "./delete-post-button";
@@ -38,7 +38,11 @@ export default function PostItem({ postId, type }: PostItemProps) {
   const isLive = liveInfo?.status?.toUpperCase() === "OPEN";
   const isMine = post.author_id === userId;
   const viewerCount = liveInfo?.concurrentUserCount?.toLocaleString() ?? "0";
-  const firstImage = post.media_urls?.[0] ?? null;
+  const firstMedia = post.media_urls?.[0] ?? null;
+  const VIDEO_EXTS = [".mp4", ".webm", ".mov"];
+  const firstMediaIsVideo = firstMedia
+    ? VIDEO_EXTS.some((ext) => firstMedia.toLowerCase().endsWith(ext))
+    : false;
 
   if (type === "DETAIL") {
     return (
@@ -137,13 +141,27 @@ export default function PostItem({ postId, type }: PostItemProps) {
               </div>
             )}
           </div>
-          {firstImage && (
-            <div className="h-[72px] w-[108px] shrink-0 overflow-hidden rounded-[10px]">
-              <img
-                src={firstImage}
-                alt=""
-                className="h-full w-full object-cover"
-              />
+          {firstMedia && (
+            <div className="relative h-[72px] w-[108px] shrink-0 overflow-hidden rounded-lg">
+              {firstMediaIsVideo ? (
+                <>
+                  <video
+                    src={firstMedia}
+                    className="h-full w-full object-cover"
+                    preload="metadata"
+                    muted
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <Play className="h-5 w-5 fill-white text-white" />
+                  </div>
+                </>
+              ) : (
+                <img
+                  src={firstMedia}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              )}
             </div>
           )}
         </div>
@@ -157,7 +175,7 @@ export default function PostItem({ postId, type }: PostItemProps) {
           isLiked={post.isLiked}
         />
         <Link to={`/post/${post.id}`}>
-          <div className="hover:border-[#00ffa3]/30 hover:bg-[#00ffa3]/5 hover:text-[#00ffa3] flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors">
+          <div className="hover:border-mint/30 hover:bg-mint/5 hover:text-mint flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors">
             <MessageCircle className="h-4 w-4" />
             <span>{commentCount}</span>
           </div>

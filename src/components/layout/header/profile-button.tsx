@@ -19,18 +19,19 @@ export default function ProfileButton() {
     return (
       <Link
         to="/sign-in"
-        className="rounded-full bg-[#00ffa3] px-4 py-1.5 text-sm font-semibold text-black transition-opacity hover:opacity-80"
+        className="rounded-full bg-mint px-4 py-1.5 text-sm font-semibold text-black transition-opacity hover:opacity-80"
       >
         로그인
       </Link>
     );
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger aria-label="프로필 메뉴">
         <img
           src={profile?.avatar || defaultAvatar}
           className="h-6 w-6 cursor-pointer rounded-full object-cover"
-          alt="내 프로필 이미지"
+          alt=""
+          aria-hidden="true"
         />
       </PopoverTrigger>
       <PopoverContent className="flex w-40 flex-col p-0">

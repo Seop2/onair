@@ -50,7 +50,7 @@ export default function PostFeed({
   if (isPending) return <Loader />;
 
   return (
-    <div className="flex flex-col rounded-[10px] border bg-card px-4">
+    <div className="flex flex-col rounded-lg border bg-card px-4">
       {data.pages.map((page) =>
         page.map((postId) => (
           <ScrollAnimation key={postId}>

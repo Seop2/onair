@@ -32,7 +32,7 @@ function ChannelBanner({
   const live = streamers?.find((s) => s.channelId === channel.channelId);
 
   return (
-    <div className="relative overflow-hidden rounded-[10px] border bg-card">
+    <div className="relative overflow-hidden rounded-lg border bg-card">
       {live?.liveThumbnailUrl && (
         <>
           <img
@@ -46,14 +46,14 @@ function ChannelBanner({
       <div className="relative flex items-center gap-4 px-4 py-3">
         <img
           src={channel.channelImageUrl ?? defaultAvatar}
-          className={`h-10 w-10 shrink-0 rounded-full object-cover ${live ? "ring-2 ring-[#00ffa3]/40" : ""}`}
+          className={`h-10 w-10 shrink-0 rounded-full object-cover ${live ? "ring-2 ring-mint/40" : ""}`}
           alt={channel.channelName}
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold">{channel.channelName}</span>
             {live && (
-              <span className="rounded bg-[#ef4444] px-1.5 py-0.5 text-[10px] font-extrabold text-white">
+              <span className="rounded bg-live px-1.5 py-0.5 text-[10px] font-extrabold text-white">
                 LIVE
               </span>
             )}
@@ -79,7 +79,7 @@ function ChannelBanner({
               href={`https://chzzk.naver.com/live/${channel.channelId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 rounded-full border border-[#00ffa3]/20 bg-[#00ffa3]/10 px-3 py-1.5 text-xs font-bold text-[#00ffa3] transition-colors hover:bg-[#00ffa3]/20"
+              className="flex items-center gap-1 rounded-full border border-mint/20 bg-mint/10 px-3 py-1.5 text-xs font-bold text-mint transition-colors hover:bg-mint/20"
             >
               방송 보기
               <ExternalLink className="h-3 w-3" />
@@ -163,7 +163,7 @@ export default function IndexPage() {
               onClick={() => handleTabChange(tab.id)}
               className={`-mb-px border-b-2 px-5 py-2.5 text-sm font-semibold transition-colors ${
                 activeTab === tab.id
-                  ? "border-[#00ffa3] text-[#00ffa3]"
+                  ? "border-mint text-mint"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >

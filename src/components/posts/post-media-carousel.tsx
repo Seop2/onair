@@ -23,7 +23,7 @@ export default function PostMediaCarousel({
       <CarouselContent>
         {mediaUrls.map((url, index) => (
           <CarouselItem key={`${url}-${index}`} className="basis-3/5">
-            <div className="bg-muted flex aspect-video items-center justify-center overflow-hidden rounded-xl">
+            <div className="bg-muted flex aspect-video items-center justify-center overflow-hidden rounded-lg">
               {isVideoFile(url) ? (
                 <video
                   src={url}

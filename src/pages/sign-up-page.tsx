@@ -24,10 +24,10 @@ export default function SignupPage() {
   return (
     <div className="flex w-full max-w-[360px] flex-col gap-3">
       {/* 메인 카드 */}
-      <div className="flex flex-col gap-5 rounded-xl border bg-card px-8 py-8">
+      <div className="flex flex-col gap-5 rounded-lg border bg-card px-8 py-8">
         {/* 로고 */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-2xl font-extrabold tracking-tight text-[#00ffa3]">
+          <span className="text-2xl font-extrabold tracking-tight text-mint">
             OnAir
           </span>
           <span className="text-xs text-muted-foreground">
@@ -47,7 +47,7 @@ export default function SignupPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
-            className="w-full rounded-[10px] border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-[#00ffa3]/50 disabled:opacity-50"
+            className="w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-mint/50 disabled:opacity-50"
           />
           <input
             type="password"
@@ -55,12 +55,12 @@ export default function SignupPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}
-            className="w-full rounded-[10px] border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-[#00ffa3]/50 disabled:opacity-50"
+            className="w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-mint/50 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isPending || !email.trim() || !password.trim()}
-            className="mt-1 w-full rounded-full bg-[#00ffa3] py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-1 w-full rounded-full bg-mint py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {isPending ? "가입 중..." : "가입하기"}
           </button>
@@ -72,11 +72,11 @@ export default function SignupPage() {
       </div>
 
       {/* 로그인 카드 */}
-      <div className="rounded-xl border bg-card px-8 py-4 text-center text-sm">
+      <div className="rounded-lg border bg-card px-8 py-4 text-center text-sm">
         <span className="text-muted-foreground">이미 계정이 있으신가요? </span>
         <Link
           to="/sign-in"
-          className="font-semibold text-[#00ffa3] transition-opacity hover:opacity-80"
+          className="font-semibold text-mint transition-opacity hover:opacity-80"
         >
           로그인
         </Link>

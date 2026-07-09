@@ -30,10 +30,10 @@ export default function ForgetPasswordPage() {
   return (
     <div className="flex w-full max-w-[360px] flex-col gap-3">
       {/* 메인 카드 */}
-      <div className="flex flex-col gap-5 rounded-xl border bg-card px-8 py-8">
+      <div className="flex flex-col gap-5 rounded-lg border bg-card px-8 py-8">
         {/* 로고 */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-2xl font-extrabold tracking-tight text-[#00ffa3]">
+          <span className="text-2xl font-extrabold tracking-tight text-mint">
             OnAir
           </span>
           <span className="text-xs text-muted-foreground">
@@ -43,8 +43,8 @@ export default function ForgetPasswordPage() {
 
         {/* 자물쇠 아이콘 + 설명 */}
         <div className="flex flex-col items-center gap-3">
-          <div className="rounded-full border-2 border-[#00ffa3]/40 p-3">
-            <LockKeyhole className="h-7 w-7 text-[#00ffa3]" />
+          <div className="rounded-full border-2 border-mint/40 p-3">
+            <LockKeyhole className="h-7 w-7 text-mint" />
           </div>
           <p className="text-sm font-semibold">로그인에 문제가 있나요?</p>
           <p className="text-center text-xs text-muted-foreground">
@@ -61,12 +61,12 @@ export default function ForgetPasswordPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
-            className="w-full rounded-[10px] border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-[#00ffa3]/50 disabled:opacity-50"
+            className="w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-mint/50 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isPending || !email.trim()}
-            className="w-full rounded-full bg-[#00ffa3] py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="w-full rounded-full bg-mint py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {isPending ? "전송 중..." : "인증 링크 보내기"}
           </button>
@@ -81,17 +81,17 @@ export default function ForgetPasswordPage() {
 
         <Link
           to="/sign-up"
-          className="text-center text-sm font-semibold text-muted-foreground transition-colors hover:text-[#00cc82]"
+          className="text-center text-sm font-semibold text-muted-foreground transition-colors hover:text-mint-deep"
         >
           새 계정 만들기
         </Link>
       </div>
 
       {/* 로그인으로 돌아가기 카드 */}
-      <div className="rounded-xl border bg-card px-8 py-4 text-center text-sm">
+      <div className="rounded-lg border bg-card px-8 py-4 text-center text-sm">
         <Link
           to="/sign-in"
-          className="font-semibold text-[#00ffa3] transition-opacity hover:opacity-80"
+          className="font-semibold text-mint transition-opacity hover:opacity-80"
         >
           로그인으로 돌아가기
         </Link>

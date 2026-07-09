@@ -39,12 +39,12 @@ export default function LikePostButton({
       onClick={handleLikeClick}
       className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${
         isLiked
-          ? "border-[#00ffa3]/40 bg-[#00ffa3]/10 text-[#00ffa3]"
-          : "hover:border-[#00ffa3]/30 hover:bg-[#00ffa3]/5 hover:text-[#00ffa3]"
+          ? "border-mint/40 bg-mint/10 text-mint"
+          : "hover:border-mint/30 hover:bg-mint/5 hover:text-mint"
       }`}
     >
       <HeartIcon
-        className={`h-4 w-4 transition-all ${isLiked ? "fill-[#00ffa3] stroke-[#00ffa3]" : ""}`}
+        className={`h-4 w-4 transition-all ${isLiked ? "fill-mint stroke-mint" : ""}`}
       />
       <span>{likeCount}</span>
     </div>

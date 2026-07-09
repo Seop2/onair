@@ -38,10 +38,10 @@ export default function SignInPage() {
   return (
     <div className="flex w-full max-w-[360px] flex-col gap-3">
       {/* 메인 카드 */}
-      <div className="flex flex-col gap-5 rounded-xl border bg-card px-8 py-8">
+      <div className="flex flex-col gap-5 rounded-lg border bg-card px-8 py-8">
         {/* 로고 */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-2xl font-extrabold tracking-tight text-[#00ffa3]">
+          <span className="text-2xl font-extrabold tracking-tight text-mint">
             OnAir
           </span>
           <span className="text-xs text-muted-foreground">
@@ -57,7 +57,7 @@ export default function SignInPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
-            className="w-full rounded-[10px] border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-[#00ffa3]/50 disabled:opacity-50"
+            className="w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-mint/50 disabled:opacity-50"
           />
           <input
             type="password"
@@ -65,12 +65,12 @@ export default function SignInPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}
-            className="w-full rounded-[10px] border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-[#00ffa3]/50 disabled:opacity-50"
+            className="w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:ring-1 focus:ring-mint/50 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isPending || !email.trim() || !password.trim()}
-            className="mt-1 w-full rounded-full bg-[#00ffa3] py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-1 w-full rounded-full bg-mint py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {isPasswordPending ? "로그인 중..." : "로그인"}
           </button>
@@ -106,18 +106,18 @@ export default function SignInPage() {
         {/* 비밀번호 찾기 */}
         <Link
           to="/forget-password"
-          className="text-center text-xs text-muted-foreground transition-colors hover:text-[#00cc82]"
+          className="text-center text-xs text-muted-foreground transition-colors hover:text-mint-deep"
         >
           비밀번호를 잊으셨나요?
         </Link>
       </div>
 
       {/* 회원가입 카드 */}
-      <div className="rounded-xl border bg-card px-8 py-4 text-center text-sm">
+      <div className="rounded-lg border bg-card px-8 py-4 text-center text-sm">
         <span className="text-muted-foreground">계정이 없으신가요? </span>
         <Link
           to="/sign-up"
-          className="font-semibold text-[#00ffa3] transition-opacity hover:opacity-80"
+          className="font-semibold text-mint transition-opacity hover:opacity-80"
         >
           가입하기
         </Link>

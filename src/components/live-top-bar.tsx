@@ -26,8 +26,8 @@ export default function LiveTopBar({
   return (
     <div className="flex items-center gap-3 border-b pb-3">
       <div className="flex shrink-0 items-center gap-1.5">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ef4444]" />
-        <span className="text-[11px] font-extrabold tracking-widest text-[#ef4444]">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-live" />
+        <span className="text-[11px] font-extrabold tracking-widest text-live">
           LIVE
         </span>
       </div>
@@ -50,8 +50,8 @@ export default function LiveTopBar({
             onClick={() => onSelect(s.channelId, s.channelName, s.channelImageUrl)}
             className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all ${
               selectedChannelId === s.channelId
-                ? "bg-[#00ffa3]/15 text-[#00ffa3] ring-1 ring-[#00ffa3]/40"
-                : "bg-muted/60 text-foreground hover:bg-[#00ffa3]/10 hover:text-[#00ffa3]"
+                ? "bg-mint/15 text-mint ring-1 ring-mint/40"
+                : "bg-muted/60 text-foreground hover:bg-mint/10 hover:text-mint"
             }`}
           >
             <img

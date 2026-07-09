@@ -51,13 +51,13 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
   return (
     <div ref={containerRef} className="relative w-full max-w-sm">
       {selected ? (
-        <div className="flex items-center gap-2 rounded-full border border-[#00ffa3]/40 bg-[#00ffa3]/10 px-3 py-1.5">
+        <div className="flex items-center gap-2 rounded-full border border-mint/40 bg-mint/10 px-3 py-1.5">
           <img
             src={selected.channelImageUrl ?? defaultAvatar}
             alt={selected.channelName}
             className="h-5 w-5 rounded-full object-cover"
           />
-          <span className="text-sm font-bold text-[#00cc82]">
+          <span className="text-sm font-bold text-mint-deep">
             {selected.channelName}
           </span>
           <button
@@ -79,13 +79,13 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
             }}
             onFocus={() => input.trim().length >= 2 && setOpen(true)}
             placeholder="스트리머 검색..."
-            className="bg-background border-input w-full rounded-full border py-1.5 pr-4 pl-9 text-sm outline-none focus:ring-1 focus:ring-[#00ffa3]/50"
+            className="bg-background border-input w-full rounded-full border py-1.5 pr-4 pl-9 text-sm outline-none focus:ring-1 focus:ring-mint/50"
           />
         </div>
       )}
 
       {open && !selected && results.length > 0 && (
-        <ul className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border">
+        <ul className="bg-background border-border absolute z-50 mt-1 w-full rounded-lg border">
           {results.map((ch) => (
             <li key={ch.channelId}>
               <button
@@ -101,7 +101,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
                 <div>
                   <div className="text-sm font-medium">{ch.channelName}</div>
                   {ch.isLive && (
-                    <div className="text-xs text-[#ef4444]">
+                    <div className="text-xs text-live">
                       LIVE · {ch.concurrentUserCount.toLocaleString()}명
                     </div>
                   )}
@@ -113,7 +113,7 @@ export default function StreamerFilter({ onSelect }: StreamerFilterProps) {
       )}
 
       {open && !selected && isFetching && (
-        <div className="bg-background border-border absolute z-50 mt-1 w-full rounded-xl border px-3 py-2 text-sm text-muted-foreground">
+        <div className="bg-background border-border absolute z-50 mt-1 w-full rounded-lg border px-3 py-2 text-sm text-muted-foreground">
           검색 중...
         </div>
       )}

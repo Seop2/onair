@@ -19,13 +19,13 @@ export default function NoticePage() {
           <ChevronLeft className="h-5 w-5" />
         </Link>
         <div className="flex items-center gap-2">
-          <Megaphone className="h-5 w-5 text-[#00ffa3]" />
+          <Megaphone className="h-5 w-5 text-mint" />
           <h1 className="text-lg font-bold">공지사항</h1>
         </div>
       </div>
 
       {/* 목록 */}
-      <div className="rounded-[10px] border bg-card">
+      <div className="rounded-lg border bg-card">
         {isPending &&
           Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="border-b px-5 py-4 last:border-b-0">
@@ -56,7 +56,7 @@ export default function NoticePage() {
               <div className="mb-1 flex items-start justify-between gap-3">
                 <div className="flex items-center gap-2">
                   {index === 0 && (
-                    <span className="shrink-0 rounded bg-[#00ffa3] px-1.5 py-0.5 text-[10px] font-extrabold text-black">
+                    <span className="shrink-0 rounded bg-mint px-1.5 py-0.5 text-[10px] font-extrabold text-black">
                       NEW
                     </span>
                   )}

@@ -27,7 +27,7 @@ function SidebarWriteButton() {
   return (
     <button
       onClick={handleClick}
-      className="flex w-full items-center justify-center gap-2 rounded-full bg-[#00ffa3] py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
+      className="flex w-full items-center justify-center gap-2 rounded-full bg-mint py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
     >
       <PenLine className="h-4 w-4" />
       글쓰기
@@ -42,14 +42,14 @@ function NoticeBar() {
   return (
     <Link
       to="/notice"
-      className="group flex min-w-0 flex-1 items-center gap-2 overflow-hidden rounded-full border border-[#00ffa3]/20 bg-[#00ffa3]/5 px-3 py-1.5 transition-colors hover:border-[#00ffa3]/40 hover:bg-[#00ffa3]/10"
+      className="group flex min-w-0 flex-1 items-center gap-2 overflow-hidden rounded-full border border-mint/20 bg-mint/5 px-3 py-1.5 transition-colors hover:border-mint/40 hover:bg-mint/10"
     >
-      <Megaphone className="h-3.5 w-3.5 shrink-0 text-[#00ffa3]" />
+      <Megaphone className="h-3.5 w-3.5 shrink-0 text-mint" />
       <span className="text-muted-foreground truncate text-xs font-medium">
-        <span className="mr-1.5 text-[#00ffa3] font-semibold">공지</span>
+        <span className="mr-1.5 text-mint font-semibold">공지</span>
         {notice.title}
       </span>
-      <ChevronRight className="h-3 w-3 shrink-0 text-[#00ffa3]/50 transition-transform group-hover:translate-x-0.5" />
+      <ChevronRight className="h-3 w-3 shrink-0 text-mint/50 transition-transform group-hover:translate-x-0.5" />
     </Link>
   );
 }
@@ -70,7 +70,7 @@ export default function GlobalLayout() {
       <aside className="fixed top-0 left-0 z-40 hidden h-screen w-56 flex-col border-r bg-background lg:flex">
         {/* 로고 */}
         <Link to="/" className="flex flex-col gap-0.5 px-5 py-5">
-          <span className="text-xl font-extrabold tracking-tight text-[#00ffa3]">
+          <span className="text-xl font-extrabold tracking-tight text-mint">
             OnAir
           </span>
           <span className="text-xs text-muted-foreground">
@@ -84,9 +84,9 @@ export default function GlobalLayout() {
             <Link
               key={label}
               to={to}
-              className={`flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 isNavActive(to)
-                  ? "bg-[#00ffa3]/10 text-[#00ffa3]"
+                  ? "bg-mint/10 text-mint"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
@@ -117,7 +117,7 @@ export default function GlobalLayout() {
               문의
             </a>
           </div>
-          <p className="mt-1 text-[10px] text-muted-foreground opacity-50">
+          <p className="mt-1 text-[10px] text-muted-foreground">
             NAVER 치지직과 공식 제휴 관계가 없는 팬 커뮤니티입니다.
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function GlobalLayout() {
         <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md lg:hidden">
           <div className="flex h-14 items-center justify-between px-4">
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-lg font-extrabold tracking-tight text-[#00ffa3]">
+              <span className="text-lg font-extrabold tracking-tight text-mint">
                 OnAir
               </span>
             </Link>
@@ -161,10 +161,10 @@ export default function GlobalLayout() {
 
         <footer className="border-t py-5 text-center text-xs text-muted-foreground">
           <Analytics />
-          <p className="opacity-60">
+          <p>
             OnAir는 NAVER 치지직(CHZZK)과 공식 제휴 관계가 없는 팬 커뮤니티입니다.
           </p>
-          <p className="mt-1 opacity-60">
+          <p className="mt-1">
             Icon by{" "}
             <a
               href="https://icons8.com"

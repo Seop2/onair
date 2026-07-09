@@ -18,9 +18,9 @@ export default function ThemeButton() {
   const setTheme = useSetTheme(); //액션 함수 불러옴.
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger aria-label="테마 설정">
         <div className="hover:bg-muted cursor-pointer rounded-full p-2">
-          <SunIcon />
+          <SunIcon aria-hidden="true" />
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-35 p-0">

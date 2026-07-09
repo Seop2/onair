@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@config "../tailwind.config.ts";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -8,6 +9,34 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* ── DESIGN.md §2 Mint Ramp ─────────────────────────────────── */
+  --color-mint: #00ffa3;
+  --color-mint-deep: #00cc82;
+  --color-mint-forest: #009962;
+  --color-mint-dark-forest: #005c3a;
+
+  /* ── DESIGN.md §2 Signal ────────────────────────────────────── */
+  --color-live: #ef4444;
+  --color-destructive-signal: #f87171;
+
+  /* ── DESIGN.md §2 Ink & Text (다크 모드) ────────────────────── */
+  --color-ink: #f8f8f8;
+  --color-ink-muted: #a3a3a3;
+  --color-ink-dim: #6b7b74;
+
+  /* ── DESIGN.md §2 Surface (다크 모드) ───────────────────────── */
+  --color-canvas: #171717;
+  --color-canvas-card: #222222;
+  --color-canvas-elevated: #2a2a2a;
+
+  /* ── DESIGN.md §2 Surface (라이트 모드) ─────────────────────── */
+  --color-canvas-light: #ffffff;
+  --color-canvas-card-light: #fafafa;
+  --color-ink-light: #0a0a0a;
+  --color-ink-muted-light: #6b7280;
+  --color-border-light: #e5e7eb;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
